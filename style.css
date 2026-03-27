@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sky {
+  width: 100vw;
+  height: 100vh;
+  background: #000000; /* Fundo totalmente preto */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Nuvem levemente cinza para destacar no preto */
+.cloud {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 120px;
+  background: #f0f0f0;
+  border-radius: 200px;
+  box-shadow: 0 10px 50px rgba(255, 255, 255, 0.1);
+  z-index: 10;
+}
+
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: #f0f0f0;
+  border-radius: 50%;
+}
+
+.cloud::before { width: 160px; height: 160px; top: -80px; left: 60px; }
+.cloud::after { width: 130px; height: 130px; top: -65px; right: 70px; }
+
+/* Chão escuro */
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(to bottom, #1a1a1a 0%, #000000 100%);
+  border-top: 1px solid #333;
+  z-index: 8;
+}
+
+/* Letras com efeito de brilho */
+.letter {
+  position: absolute;
+  color: #00f2ff; /* Cor ciano/neon para destacar no preto */
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(0, 242, 255, 0.8);
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes fallToGround {
+  to {
+    transform: translateY(var(--fall-dist));
+    opacity: 0;
+  }
+}
+
+/* Splash de água neon */
+.splash {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00f2ff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9;
+  animation: splash-anim 0.4s ease-out forwards;
+}
+
+@keyframes splash-anim {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(6) translateY(-20px); opacity: 0; }
+}
